@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	
+  <bean id="typeDao" class="swust.dao.impl.TypeDaoImpl" p:sessionFactory-ref="sessionFactory"></bean>
+  <bean id="typeService" class="swust.service.impl.TypeServiceImpl" p:typeDao-ref="typeDao"></bean>
+  <bean id="typeAction" class="swust.action.TypeAction" p:typeService-ref="typeService" scope="prototype"></bean>
+  
+  <bean id="consumerDao" class="swust.dao.impl.ConsumerDaoImpl" p:sessionFactory-ref="sessionFactory"></bean>
+  <bean id="consumerService" class="swust.service.impl.ConsumerServiceImpl" p:consumerDao-ref="consumerDao"></bean>
+  <bean id="consumerAction" class="swust.action.ConsumerAction" p:consumerService-ref="consumerService" scope="prototype"></bean>
+  
+  <bean id="consumeDao" class="swust.dao.impl.ConsumeDaoImpl" p:sessionFactory-ref="sessionFactory"></bean>
+  <bean id="consumeService" class="swust.service.impl.ConsumeServiceImpl" p:consumeDao-ref="consumeDao" p:typeDao-ref="typeDao"></bean>
+  <bean id="consumeAction" class="swust.action.ConsumeAction" p:consumeService-ref="consumeService" p:typeService-ref="typeService" scope="prototype"></bean>
+  
+  <bean id="adminAction" class="swust.action.AdminAction" scope="prototype"></bean>
+  
+  <bean id="verifyCodeAction" class="swust.action.VerifyCodeAction"></bean>
+</beans>
